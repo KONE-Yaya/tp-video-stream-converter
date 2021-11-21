@@ -1,0 +1,15 @@
+version: "3"
+services:
+  video-stream-api:
+    image: 'koneyayangolo/video-stream-api:0.0.1-SNAPSHOT'
+  video-stream-conv-server:
+    image: 'koneyayangolo/video-stream-conv-server:0.0.1-SNAPSHOT'
+  nginx:
+    image: nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - video-stream-api
+      - video-stream-conv-server

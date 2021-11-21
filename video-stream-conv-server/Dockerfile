@@ -3,5 +3,4 @@ ENV SPRING_OUTPUT_ANSI_ENABLED=ALWAYS \
 JAVA_OPTS=""
 WORKDIR /app
 ADD target/*.jar app.jar
-EXPOSE 9991
 CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/app/app.jar"]
