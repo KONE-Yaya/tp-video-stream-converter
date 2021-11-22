@@ -1,9 +1,19 @@
 version: "3"
 services:
   video-stream-api:
-    image: 'koneyayangolo/video-stream-api:0.0.1-SNAPSHOT'
+    image: video-stream-api
   video-stream-conv-server:
-    image: 'koneyayangolo/video-stream-conv-server:0.0.1-SNAPSHOT'
+    image: video-stream-conv-server
+  video-stream-conv-worker:
+    image: video-stream-conv-worker
+  video-stream-core:
+    image: video-stream-core
+    ports:
+      - "9993:8080"
+    depends_on:
+      - mongodb
+    links:
+      - mongodb
   nginx:
     image: nginx
     ports:
@@ -13,3 +23,12 @@ services:
     depends_on:
       - video-stream-api
       - video-stream-conv-server
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+  mongodb:
+    image: "mongo:latest"
+    ports:
+      - "27017:27017"
