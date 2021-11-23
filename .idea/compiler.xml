@@ -11,8 +11,8 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="video-stream-api" target="11" />
-      <module name="video-stream-conv-server" target="11" />
+      <module name="video-stream-api" target="8" />
+      <module name="video-stream-conv-server" target="8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
