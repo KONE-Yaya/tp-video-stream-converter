@@ -2,8 +2,16 @@ version: "3"
 services:
   video-stream-api:
     image: video-stream-api
+    depends_on:
+      - video-stream-core
+    links:
+      - video-stream-core
   video-stream-conv-server:
     image: video-stream-conv-server
+    depends_on:
+      - video-stream-core
+    links:
+      - video-stream-core
   video-stream-conv-worker:
     image: video-stream-conv-worker
   video-stream-core:
@@ -12,8 +20,10 @@ services:
       - "9993:8080"
     depends_on:
       - mongodb
+      - redis
     links:
       - mongodb
+      - redis
   nginx:
     image: nginx
     ports:
@@ -32,3 +42,7 @@ services:
     image: "mongo:latest"
     ports:
       - "27017:27017"
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
