@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.MediaType;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -32,9 +33,9 @@ public class VideoStreamCorePublisher {
     @RequestMapping(value ="/conv", method = RequestMethod.POST,
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE,MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public String publishMessage(@RequestParam Map<String, String> body) {
+    public String publishMessage(@RequestBody Map<String,String> body) {
         CustomMessage message = new CustomMessage();
-
+        
         message.setId(UUID.randomUUID().toString());
         message.setFilename(body.get("filename"));
         message.setMode(body.get("mode"));
@@ -54,5 +55,17 @@ public class VideoStreamCorePublisher {
         videoRepository.save(video);
 
         return "Your video has been uploaded with id:"+ message.getId();
+    }
+
+    @RequestMapping(value ="/status/{id}", method = RequestMethod.GET,
+            consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE,MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+    public String getVideoStatus(@PathVariable String id) {
+        HashOperations hashOperations = redisTemplate.opsForHash();
+        hashOperations.get("videos", id);
+        System.out.println("###### HasOperation ##############");
+        System.out.println(hashOperations.get("videos", id));
+        //System.out.println(v);
+        return "Your video status is:"+ "Papa";
     }
 }

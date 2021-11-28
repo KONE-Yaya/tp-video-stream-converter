@@ -28,7 +28,7 @@ public class VideoController {
     @RequestMapping(method = RequestMethod.POST,
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE,MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public String convertVideo(@RequestParam Map<String, String> body ) {
+    public String convertVideo(@RequestBody  Map<String, String> body ) {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 

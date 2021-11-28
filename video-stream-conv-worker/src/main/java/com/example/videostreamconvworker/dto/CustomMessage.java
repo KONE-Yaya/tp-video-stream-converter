@@ -12,9 +12,9 @@ import java.util.Date;
 @AllArgsConstructor
 @ToString
 public class CustomMessage {
-
-    private String messageId;
-    private String message;
-    private Date messageDate;
-
+    private String id;
+    private String filename;
+    private String status;
+    private String mode;
+    private Date convDate;
 }
