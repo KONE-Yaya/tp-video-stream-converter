@@ -25,17 +25,12 @@ public class VideoApiController {
     @Value("${spring.server.core.address}")
     private String address;
 
-    @RequestMapping(value ="/{id}", method = RequestMethod.GET,
-            consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE,MediaType.APPLICATION_JSON_VALUE},
+    @RequestMapping( method = RequestMethod.GET,
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public String convertVideo(@PathVariable String id ) {
+    public String convertVideo(@RequestParam String id) {
         HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-
         HttpEntity<String> entity = new HttpEntity<>(headers);
-
         String url = "http://" + address + "/api/status/" + id;
-
         return JSONObject.valueToString(restTemplate.exchange(url, HttpMethod.GET, entity, String.class).getBody());
 
     }

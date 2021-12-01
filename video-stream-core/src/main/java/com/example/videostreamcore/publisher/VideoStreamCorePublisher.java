@@ -58,14 +58,11 @@ public class VideoStreamCorePublisher {
     }
 
     @RequestMapping(value ="/status/{id}", method = RequestMethod.GET,
-            consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE,MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public String getVideoStatus(@PathVariable String id) {
         HashOperations hashOperations = redisTemplate.opsForHash();
         hashOperations.get("videos", id);
-        System.out.println("###### HasOperation ##############");
-        System.out.println(hashOperations.get("videos", id));
-        //System.out.println(v);
-        return "Your video status is:"+ "Papa";
+        Video v = (Video) hashOperations.get("videos", id);
+        return "Your video status is: "+ v.getStatus();
     }
 }
