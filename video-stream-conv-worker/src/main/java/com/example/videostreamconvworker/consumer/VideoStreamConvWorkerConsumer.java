@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import ws.schild.jave.Encoder;
 import ws.schild.jave.MultimediaObject;
+import ws.schild.jave.encode.AudioAttributes;
 import ws.schild.jave.encode.EncodingAttributes;
 import ws.schild.jave.encode.VideoAttributes;
 import ws.schild.jave.encode.enums.X264_PROFILE;
@@ -68,6 +69,13 @@ public class VideoStreamConvWorkerConsumer {
         File source = new File("/etc/data/videos/"+ filename);
         File target = new File("/etc/data/videos/" + justfilename + "_converted." + mode);
 
+        /* Step 2. Set Audio Attrributes for conversion*/
+        AudioAttributes audio = new AudioAttributes();
+        audio.setCodec("aac");
+        // here 64kbit/s is 64000
+        audio.setBitRate(64000);
+        audio.setChannels(2);
+        audio.setSamplingRate(44100);
 
         /* Step 3. Set Video Attributes for conversion*/
         VideoAttributes video = new VideoAttributes();
@@ -82,6 +90,7 @@ public class VideoStreamConvWorkerConsumer {
         /* Step 4. Set Encoding Attributes*/
         EncodingAttributes attrs = new EncodingAttributes();
         attrs.setOutputFormat(mode);
+        attrs.setAudioAttributes(audio);
         attrs.setVideoAttributes(video);
 
         /* Step 5. Do the Encoding*/
