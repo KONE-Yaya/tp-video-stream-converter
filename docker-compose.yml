@@ -14,6 +14,8 @@ services:
       - video-stream-core
   video-stream-conv-worker:
     image: video-stream-conv-worker
+    volumes:
+      - ./data:/etc/data/videos
   video-stream-core:
     image: video-stream-core
     ports:
