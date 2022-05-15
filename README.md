@@ -15,7 +15,7 @@ Lancer les services avec la commande suivante:
 
 # Packages
 - <h2><b style="color:red"> data </b></h2>
-Ce dossier représente le FS(File Système). Il est lié en tant que volume au conteneur <b> video-stream-conv-worker </b></br>
+Ce dossier représente le FS(File System). Il est lié en tant que volume au conteneur <b> video-stream-conv-worker </b></br>
 Il contient donc les videos à convertir et les videos qui ont été converti.
 Après conversion, la vidéo converti reprend le nom de la video source et puis 
   <b> _converted </b> à la fin du nom.
